@@ -1,0 +1,95 @@
+#' @title 
+#' Check your data   
+#' 
+#' @description 
+#' The functions \code{check_that} and \code{ensure_that} 
+#' 
+#' \code{check_that} works like \code{ensure_that} but returns 
+#' \code{TRUE} or \code{FALSE}. 
+#' 
+#' @note 
+#' These functions are inspired by eponymous functions in 
+#' package \pkg{ensurer}. 
+#'
+#' @param .data
+#' A tbl or data.frame.
+#' 
+#' @param ...
+#' Logical predicates. 
+#' Multiple conditions are considered as separate observations.  
+#' 
+#' @param .dots
+#' Used to work around non-standard evaluation. 
+#' 
+#' @return 
+#' \code{check_that} returns a logical, \code{TRUE} if all checks have passed, 
+#' \code{FALSE} otherwise. 
+#' 
+#' \code{ensure_that} throws an error if a check fails; otherwise, 
+#' \code{.data} is returned (with \code{NULL} assigned to 
+#' the \code{observations} attribute).
+#' 
+#' @seealso 
+#' \code{\link[observer]{observe_if}} in this package; 
+#' 
+#' \code{\link[ensurer]{check_that}} and \code{\link[ensurer]{ensure_that}} 
+#' from package \pkg{ensurer}; 
+#' \code{\link[validate]{check_that}} from package \pkg{validate}.  
+#' 
+#' @export
+#' 
+#' @examples 
+#' library(magrittr)
+#' 
+#' observe.mydata <- function(.data, ...) {
+#'   observe_if_(.data, 
+#'               ~ Year > 2010, 
+#'               ~ City %in% c("Paris", "New York"), 
+#'               ~ Population > 0)
+#' }
+#' 
+#' df <- data.frame(City = c("Paris", "New York", "Amsterdam"), 
+#'                  Year = c(2011, 2015, 2016), 
+#'                  Population = c(2249975, 8550405, 840486))
+#' class(df) <- c("mydata", "data.frame")
+#' observe(df)
+#' observe(df) %>% obs()
+#' check(df)  # FALSE
+#' \dontrun{
+#' ensure(df) # throws an error
+#' }
+#' 
+check_that <- 
+function(.data, 
+         ...)
+{
+  check_that_(.data, .dots = lazyeval::lazy_dots(...))
+}
+
+
+#' @export
+#' @rdname check_that
+#' 
+check_that_ <-
+function (.data, 
+          ..., 
+          .dots) 
+{
+  dots <- lazyeval::all_dots(.dots, ...)
+  .data <- observe_if_(.data, .dots = dots)
+  obs <- observations(.data)
+  is.null(obs) || all(obs[["Status"]]=="passed")
+}
+
+
+#' @export
+#' @rdname check_that
+#' 
+check <- 
+function(.data, 
+         ...)
+{
+  .data <- observe(.data)
+  obs <- observations(.data)
+  check_that_(.data, .dots = obs[["Predicate"]])
+}

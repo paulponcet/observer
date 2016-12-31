@@ -1,0 +1,60 @@
+---
+title: 'Check your data in R'
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Check your data in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(dplyr)
+library(tibble)
+library(observer)
+```
+
+
+## Create observations from your data with 'observe_if'
+
+The observer package provides... 
+
+According to the documentation of the `diamonds` dataset in package `ggplot2`, 
+the column `depth` is equal to `100*2*z/(x+y)`. 
+Let us make an observation of this: 
+
+```{r}
+df <- ggplot2::diamonds %>% 
+  mutate(depth2 = 100*2*z/(x+y)) 
+
+df %>% 
+  observe_if(x > 0, y > 0, z > 0, 
+             abs(depth-depth2) < 1) %>% 
+  obs()
+```
+
+We observe that 93 rows fail to satisfy this rule. 
+To go further we need to see what is happening: 
+
+```{r}
+inspect(df, 4)
+```
+
+Another way is to write it with standard evaluation: 
+
+```{r}
+## Write your predicates first
+p <- c(~ x > 0, ~ y > 0, ~ z > 0, 
+       ~ abs(depth-depth2) < 1)
+
+## Make observations
+df %>% 
+  observe_if_(.dots = p) %>% 
+  obs()
+```
+
+## Creation a customized 'observe' for your data
+
+
+

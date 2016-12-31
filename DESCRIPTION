@@ -1,0 +1,26 @@
+Package: observer
+Type: Package
+Title: Observe and check your data
+Version: 0.1.1
+Date: 2016-12-29
+Authors@R: person("Paul", "Poncet", , "paulponcet@yahoo.fr", role = c("aut", "cre"))
+Description: This package checks that a given dataset passes user-specified rules.
+License: MIT + file LICENSE
+LazyData: TRUE
+Depends:
+    R (>= 3.1.3)
+Imports: 
+    base2,
+    bit, 
+    dplyr, 
+    lazyeval, 
+    magrittr, 
+    tibble
+VignetteBuilder: knitr
+Suggests:
+    knitr, 
+    ggplot2,
+    testthat
+URL: https://github.com/paulponcet/observer
+BugReports: https://github.com/paulponcet/observer/issues
+RoxygenNote: 5.0.1
