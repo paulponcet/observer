@@ -1,4 +1,6 @@
 
+# Modification of the auto_name function from package 'purrr'
+# 
 #' @importFrom lazyeval as.lazy_dots
 #' 
 auto_name_long <- 

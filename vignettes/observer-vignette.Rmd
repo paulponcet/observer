@@ -1,5 +1,5 @@
 ---
-title: 'Check your data in R'
+title: 'Observe and check your data in R'
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -26,16 +26,17 @@ Let us make an observation of this:
 
 ```{r}
 df <- ggplot2::diamonds %>% 
-  mutate(depth2 = 100*2*z/(x+y)) 
+  mutate(depth2 = 100*2*z/(x+y)) %>% 
+  observe_if(x > 0, 
+             y > 0, 
+             z > 0, 
+             abs(depth-depth2) < 1)
 
-df %>% 
-  observe_if(x > 0, y > 0, z > 0, 
-             abs(depth-depth2) < 1) %>% 
-  obs()
+obs(df)
 ```
 
 We observe that 93 rows fail to satisfy this rule. 
-To go further we need to see what is happening: 
+To go further we need to see what is happening; with `inspect` we can select the 93 rows at stake: 
 
 ```{r}
 inspect(df, 4)
@@ -54,7 +55,7 @@ df %>%
   obs()
 ```
 
-## Creation a customized 'observe' for your data
+## Creation of a customized 'observe' for your data
 
 
 

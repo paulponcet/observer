@@ -15,7 +15,7 @@
 #' of \code{observations} is compressed with the \code{\link[bit]{as.bit}} 
 #' function from package \pkg{bit}. 
 #' If \code{compressed=FALSE}, this column is uncompressed 
-#' (and becomes understandable by the user). 
+#' (and becomes understandable / readable by the user). 
 #' 
 #' @param value
 #' An object of class \code{obs_df}, see 

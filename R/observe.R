@@ -138,10 +138,10 @@ function(.data,
 
 
 
-#' @importFrom base2 is.empty
+#' @importFrom bazar is.empty
 #' @importFrom bit as.bit
 #' @importFrom lazyeval lazy_eval
-#' @importFrom tibble tibble
+#' @importFrom tibble tibble_
 #' 
 observe_if_impl <- 
 function(df, 
@@ -150,23 +150,23 @@ function(df,
 {
   old_obs <- obs(df)
   if (!append) old_obs <- NULL
-  max_id <- if (base2::is.empty(old_obs)) 0L else max(old_obs[["Id"]])
+  max_id <- if (bazar::is.empty(old_obs)) 0L else max(old_obs[["Id"]])
   p <- lazyeval::lazy_eval(dots, df)
   n <- length(dots)
   
   l <- lapply(p, FUN = function(x) has_failed(x, nrow(df)))
   
-  new_obs <- tibble::tibble(
-    Id = seq_len(n) + max_id, 
-    Predicate = names(p), 
-    Passed = sapply(l, FUN = function(x) sum(!x, na.rm = TRUE)), 
-    Failed = sapply(l, FUN = function(x) sum(x, na.rm = TRUE)), 
-    Missing = sapply(l, FUN = function(x) sum(is.na(x))),
-    #Failed_rows = lapply(p, FUN = function(x) which_fails(x, nrow(df))), 
-    Rows = lapply(l, FUN = bit::as.bit),
-    Status = sapply(Failed, FUN = function(x) if (x > 0) "failed" else "passed"),
-    Number_of_trials = rep(1L, n)
-  )
+  new_obs <- tibble::tibble_(list(
+    Id = ~ seq_len(n) + max_id, 
+    Predicate = ~ names(p), 
+    Passed = ~ sapply(l, FUN = function(x) sum(!x, na.rm = TRUE)), 
+    Failed = ~ sapply(l, FUN = function(x) sum(x, na.rm = TRUE)), 
+    Missing = ~ sapply(l, FUN = function(x) sum(is.na(x))),
+    #Failed_rows = ~ lapply(p, FUN = function(x) which_fails(x, nrow(df))), 
+    Rows = ~ lapply(l, FUN = bit::as.bit),
+    Status = ~ sapply(Failed, FUN = function(x) if (x > 0) "failed" else "passed"),
+    Number_of_trials = ~ rep(1L, n)
+  ))
   
   new_obs <- rbind(old_obs, new_obs)
   observations(df) <- new_obs

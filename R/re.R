@@ -22,7 +22,7 @@
 #' \code{\link[observer]{check_that}}, 
 #' and \code{\link[observer]{ensure_that}} in this package. 
 #' 
-#' @importFrom base2 is.empty
+#' @importFrom bazar is.empty
 #' @importFrom dplyr filter_
 #' @importFrom dplyr mutate_
 #' @importFrom magrittr %>%
@@ -34,8 +34,8 @@ function(.data,
 {
   obs <- observations(.data)
   observations(.data) <- NULL
-  if (base2::is.empty(obs)) return(.data)
-  obs2 <- observe_(.data, .dots = obs[["Predicate"]]) %>% 
+  if (bazar::is.empty(obs)) return(.data)
+  obs2 <- observe_if_(.data, .dots = obs[["Predicate"]]) %>% 
     observations() %>% 
     dplyr::mutate_(Number_of_trials = ~ obs[["Number_of_trials"]]+1L) %>% 
     dplyr::filter_(~ Status %in% status)

@@ -13,7 +13,7 @@
 #' @seealso 
 #' \code{\link[utils]{View}} from package \pkg{utils}. 
 #' 
-# #' @importFrom utils View
+#' @importFrom utils View
 #' @export
 #' 
 View_obs <- 
@@ -22,5 +22,9 @@ function(x,
 {
   if (missing(title))
     title <- paste0("obs(", deparse(substitute(x))[1L], ")")
-  View(observations(x, compressed = FALSE), title)
+  if (is.RStudio()) {
+    View(observations(x, compressed = FALSE), title)
+  } else {
+    utils::View(observations(x, compressed = FALSE), title)
+  }
 }

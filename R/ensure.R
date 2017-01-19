@@ -30,7 +30,7 @@ function (.data,
       rows <- which(as.logical(ob[["Rows"]][[1L]]))
       etc <- if (length(rows) > 6) "..." else ""
       stop(paste0("condition '", ob[["Predicate"]], "' failed on row(s) ", 
-                  paste(head(rows), collapse = ", "), etc), 
+                  paste(utils::head(rows), collapse = ", "), etc), 
            call. = FALSE)
     }
   }

@@ -2,10 +2,11 @@
 #' Check your data   
 #' 
 #' @description 
-#' The functions \code{check_that} and \code{ensure_that} 
-#' 
-#' \code{check_that} works like \code{ensure_that} but returns 
-#' \code{TRUE} or \code{FALSE}. 
+#' The function \code{check_that} returns \code{FALSE} 
+#' if any of the predicates tested fails, \code{TRUE} otherwise. 
+#' The function \code{ensure_that} throws an error if 
+#' any of the predicates tested fails, and returns \code{.data} 
+#' unchanged otherwise. 
 #' 
 #' @note 
 #' These functions are inspired by eponymous functions in 

@@ -17,9 +17,9 @@
 #' @seealso 
 #' \code{\link[observer]{observe_if}} in this package. 
 #' 
-#' @importFrom base2 as.empty
-#' @importFrom base2 is.empty
-#' @importFrom base2 is.wholenumber
+#' @importFrom bazar as.empty
+#' @importFrom bazar is.empty
+#' @importFrom bazar is.wholenumber
 #' @export
 #' 
 #' @examples 
@@ -46,12 +46,12 @@ function(.data,
          cols = "all")
 {
   if (length(ob) > 1L) stop("'ob' must be of length one, inspect one observation at a time")
-  stopifnot(base2::is.wholenumber(ob))
+  stopifnot(bazar::is.wholenumber(ob))
   
   obs <- observations(.data)
-  if (base2::is.empty(obs)) {
+  if (bazar::is.empty(obs)) {
     message("no observations detected in '.data', so '.data[0,]' is returned")
-    return(base2::as.empty(.data))
+    return(bazar::as.empty(.data))
   }
   
   cols_selection <- cols
@@ -64,7 +64,7 @@ function(.data,
     rows <- which(as.logical(ob[["Rows"]][[1L]]))
     cols <- parse(text = ob[["Predicate"]])
     cols <- intersect(all.vars(cols), names(.data))
-    cols <- if (base2::is.empty(cols)) names(.data) else cols
+    cols <- if (bazar::is.empty(cols)) names(.data) else cols
   }
   
   if (length(cols_selection) == 1L && cols_selection %in% c("all", "most", "some")) {
