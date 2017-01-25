@@ -18,7 +18,7 @@
 #' (and becomes understandable / readable by the user). 
 #' 
 #' @param value
-#' An object of class \code{obs_df}, see 
+#' A tibble, see 
 #' \code{\link[observer]{observations}}. 
 #' 
 #' @return 

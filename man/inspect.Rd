@@ -11,13 +11,19 @@ inspect(.data, ob, cols = "all")
 
 \item{ob}{integer. A row of the \code{observations} attribute to be inspected.}
 
-\item{cols}{}
-}
-\value{
-
+\item{cols}{character. One of \code{"all"}, \code{"most"}, \code{"some"}. 
+If \code{cols = "all"}, all \code{.data} columns are kept in the result. 
+If \code{cols = "some"}, only columns that are concerned by the 
+observation \code{ob} are kept. 
+\code{cols = "most"} is like \code{cols = "some"}, except that 
+columns which are of type \code{"character"} or \code{"factor"} are also 
+kept.}
 }
 \description{
-TO BE WRITTEN
+Once a table has been observed with \code{observe_if}, one may wish to dig 
+into the observations made. The function \code{inspect} returns a sub-table 
+of \code{.data} whose rows correspond to the rows identified by the 
+observation \code{ob}.
 }
 \examples{
 library(magrittr)

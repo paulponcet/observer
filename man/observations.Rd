@@ -24,7 +24,7 @@ function from package \pkg{bit}.
 If \code{compressed=FALSE}, this column is uncompressed 
 (and becomes understandable / readable by the user).}
 
-\item{value}{An object of class \code{obs_df}, see 
+\item{value}{A tibble, see 
 \code{\link[observer]{observations}}.}
 }
 \value{

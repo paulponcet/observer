@@ -42,7 +42,8 @@ This attribute is a data frame (actually a \code{\link[tibble]{tibble}})
 which contains all check runs.
 }
 \description{
-
+\code{observe_if} identifies rows of \code{.data} where the predicates 
+tested fail.
 }
 \examples{
 library(magrittr)

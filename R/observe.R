@@ -2,6 +2,8 @@
 #' Observe your data 
 #' 
 #' @description 
+#' \code{observe_if} identifies rows of \code{.data} where the predicates 
+#' tested fail. 
 #' 
 #' @param .data
 #' A tbl or data.frame.

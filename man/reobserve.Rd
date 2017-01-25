@@ -15,13 +15,18 @@ reensure(.data, status = c("failed", "passed"))
 \arguments{
 \item{.data}{A tbl or data frame.}
 
-\item{status}{character.}
+\item{status}{character. One of \code{"failed"}, \code{"passed"}, or both. 
+The \code{observations} attribute of \code{.data} is filtered according 
+to the value of \code{status}.}
 }
 \value{
-
+\code{.data} is returned, with its \code{observations} attribute udpated.
 }
 \description{
-blablablabla
+\code{reobserve} (resp. \code{recheck}, \code{reensure}) re-reruns the 
+function \code{observe_if} (resp. \code{check_that}, \code{ensure_that}) on 
+\code{.data} with respect to the predicates contained in its 
+\code{observations} attribute created at a previous occasion.
 }
 \seealso{
 \code{\link[observer]{observe_if}}, 

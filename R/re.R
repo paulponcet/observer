@@ -7,15 +7,21 @@
 #' Update observations 
 #' 
 #' @description 
-#' blablablabla
+#' \code{reobserve} (resp. \code{recheck}, \code{reensure}) re-reruns the 
+#' function \code{observe_if} (resp. \code{check_that}, \code{ensure_that}) on 
+#' \code{.data} with respect to the predicates contained in its 
+#' \code{observations} attribute created at a previous occasion.  
 #' 
 #' @param .data
 #' A tbl or data frame. 
 #' 
 #' @param status 
-#' character. 
+#' character. One of \code{"failed"}, \code{"passed"}, or both. 
+#' The \code{observations} attribute of \code{.data} is filtered according 
+#' to the value of \code{status}. 
 #' 
 #' @return 
+#' \code{.data} is returned, with its \code{observations} attribute udpated. 
 #' 
 #' @seealso 
 #' \code{\link[observer]{observe_if}}, 

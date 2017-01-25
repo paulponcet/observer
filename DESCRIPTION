@@ -1,10 +1,11 @@
 Package: observer
 Type: Package
 Title: Observe and Check your Data
-Version: 0.1.1
-Date: 2016-12-29
+Version: 0.1.2
+Date: 2017-01-25
 Authors@R: person("Paul", "Poncet", , "paulponcet@yahoo.fr", role = c("aut", "cre"))
-Description: This package checks that a given dataset passes user-specified rules.
+Description: Checks that a given dataset passes user-specified 
+    rules. The main functions are observe_if() and inspect(). 
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends:

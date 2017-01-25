@@ -18,9 +18,9 @@ library(observer)
 
 ## Create observations from your data with 'observe_if'
 
-The observer package provides... 
+The observer package checks that a given dataset passes user-specified rules. The main functions are `observe_if` and `inspect`. 
 
-According to the documentation of the `diamonds` dataset in package `ggplot2`, 
+For instance, according to the documentation of the `diamonds` dataset in package `ggplot2`, 
 the column `depth` is equal to `100*2*z/(x+y)`. 
 Let us make an observation of this: 
 
@@ -36,7 +36,7 @@ obs(df)
 ```
 
 We observe that 93 rows fail to satisfy this rule. 
-To go further we need to see what is happening; with `inspect` we can select the 93 rows at stake: 
+To go further we need to see what is happening; with `inspect` we can select the  rows at stake: 
 
 ```{r}
 inspect(df, 4)
@@ -54,8 +54,6 @@ df %>%
   observe_if_(.dots = p) %>% 
   obs()
 ```
-
-## Creation of a customized 'observe' for your data
 
 
 

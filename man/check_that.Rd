@@ -38,10 +38,12 @@ Multiple conditions are considered as separate observations.}
 the \code{observations} attribute).
 }
 \description{
-The functions \code{check_that} and \code{ensure_that} 
+The function \code{check_that} returns \code{FALSE} 
+if any of the predicates tested fails, \code{TRUE} otherwise. 
 
-\code{check_that} works like \code{ensure_that} but returns 
-\code{TRUE} or \code{FALSE}.
+Where \code{check_that} would return \code{FALSE}, the function 
+\code{ensure_that} throws an error instead; otherwise it returns 
+\code{.data} unchanged.
 }
 \note{
 These functions are inspired by eponymous functions in 

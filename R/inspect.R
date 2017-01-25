@@ -2,7 +2,10 @@
 #' Inspect observations
 #' 
 #' @description 
-#' TO BE WRITTEN
+#' Once a table has been observed with \code{observe_if}, one may wish to dig 
+#' into the observations made. The function \code{inspect} returns a sub-table 
+#' of \code{.data} whose rows correspond to the rows identified by the 
+#' observation \code{ob}. 
 #' 
 #' @param .data
 #' A tbl or data frame. 
@@ -11,8 +14,13 @@
 #' integer. A row of the \code{observations} attribute to be inspected. 
 #' 
 #' @param cols
-#' 
-#' @return 
+#' character. One of \code{"all"}, \code{"most"}, \code{"some"}. 
+#' If \code{cols = "all"}, all \code{.data} columns are kept in the result. 
+#' If \code{cols = "some"}, only columns that are concerned by the 
+#' observation \code{ob} are kept. 
+#' \code{cols = "most"} is like \code{cols = "some"}, except that 
+#' columns which are of type \code{"character"} or \code{"factor"} are also 
+#' kept. 
 #' 
 #' @seealso 
 #' \code{\link[observer]{observe_if}} in this package. 
@@ -81,6 +89,6 @@ function(.data,
   }
 
   .data <- .data[rows, cols]
-  observations(.data) <- structure(ob, class = c("obs_df", "tbl_df", "tbl", "data.frame"))
+  observations(.data) <- ob#structure(ob, class = c("obs_df", "tbl_df", "tbl", "data.frame"))
   .data
 }
