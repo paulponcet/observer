@@ -1,8 +1,3 @@
-
-# on sq '.data' a ete mise a jour, 
-# on refait passer les conditions dessus
-# en supprimant les conditions qui passent
-
 #' @title 
 #' Update observations 
 #' 
